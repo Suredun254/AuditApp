@@ -1,0 +1,188 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block script %} 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+
+{% block content %}
+
+<div class='bg-[#191a22] text-black'>
+    <div class='flex flex-col md:flex-row gap-4'>
+          {% include "../components/sidebar.html" %}
+          <div class='md:w-[90%] '>
+            
+            <div class='flex flex-col md:flex-row  gap-4'>
+                <div class='p-2 flex flex-col gap-8 md:w-[75%]  border-r border-l  border-gray-600' >
+                  
+                  <div class='flex flex-row justify-between '>
+                      <div>
+                          <p>Date </p>
+                          <p class='text-sm text-gray-500'>{{date}}</p>
+                      </div>
+
+                      <div class='flex flex-row gap-4 items-center'>
+                        <div class='md:hidden block'>
+                          
+                          
+                        </div>
+                        <div>
+
+                          
+                        </div>
+
+                      </div>
+                      
+                  </div>
+                  <h1 class="bg-green text-white" style="text-align:center;">Hostels in New Hostel 2250</h1>
+                    <div class='flex flex-col md:flex-row gap-4'style="padding-left: 4rem">
+                      
+                      <div><img class='w-10' src={% static "img/hostel1.jpeg" %}/>
+                        <div class='hostel-name'><p>Hostel K</p></div>
+                      </div>
+                      <div><img class='w-10' src={% static "img/hostel3.jpeg" %}/>
+                        <div class='hostel-name'><p>Hostel L</p></div>
+                      </div>
+                      <div><img class='w-10' src={% static "img/hostel3.jpeg" %}/>
+                        <div class='hostel-name'><p>Hostel M</p></div>
+                      </div>
+                      
+                    </div>
+
+                    <h1 class="bg-blue-500 text-white" style="text-align:center;">Meters in New Hostel 2250</h1>
+                    <div class='flex flex-col md:flex-row gap-4'style="padding-left: 4rem">
+                      
+                      <div><img class='w-10' src={% static "img/K_Meter_660660.jpg" %}/>
+                        <div class='hostel-name'><p>K_Meter 660660</p></div>
+                      </div>
+                      <div><img class='w-10' src={% static "img/K_Meter_660685.jpg" %}/>
+                        <div class='hostel-name'><p>K_Meter_66085</p></div>
+                      </div>
+                      <div><img class='w-10' src={% static "img/K_Meter_660692.jpg" %}/>
+                        <div class='hostel-name'><p> K_Meter_660692</p></div>
+                      </div>
+                      <div><img class='w-10' src={% static "img/L_Meter_OD4110.jpg" %}/>
+                        <div class='hostel-name'><p> L_Meter_OD4110</p></div>
+                      </div>
+                      
+                    </div>
+                  
+                  <div class='flex mt-2 flex-col gap-4'>
+                    <div class='flex flex-col md:flex-row gap-8'>
+                      <div class='p-4 bg-red-300 text-black rounded-2xl md:w-[33%] '>
+                        <div class='flex flex-row gap-4'>
+                          <AiFillHeart/>
+                          <p>Total Audits Done</p>
+
+                        </div>
+                        <div class='flex flex-col '>
+                          <p class='text-2xl font-semibold mx-auto py-2'>
+                            {{audits_count}}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div class='p-4 bg-green-300 text-black rounded-2xl md:w-[33%]'>
+                        <div class='flex flex-row gap-4'>
+                          <AiFillHeart/>
+                          <p>Total Facilities Audited</p>
+
+                        </div>
+                        <div class='flex flex-col'>
+                          <p class='text-2xl font-semibold mx-auto py-2'>
+                            {{facility_count}}
+                          </p>
+                          
+                        </div>
+                      </div>
+                      
+                      <div class='p-4 bg-blue-500 text-black rounded-2xl md:w-[33%]'>
+                        <div class='flex flex-row gap-4'>
+                          <AiFillHeart/>
+                          <p>Highest </p>
+
+                        </div>
+                        <div class='flex flex-col'>
+                          <p class='text-2xl font-semibold mx-auto py-2'>
+                            {{highest_audit}} KwH
+                          </p>
+                          <p class='mx-auto text-sm'>{{facility}}</p>
+                          
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class='m-2 flex flex-col'>
+                      <p class='py-2 text-black'>Latest Audit</p>
+                      
+
+
+                        <div class=' rounded-2xl shadow_style'>
+                          <div class='p-4  text-black '>
+                            <div class='flex flex-row gap-4'>
+                              <p class='font-semibold text-black'>Audit Stats</p>
+
+                            </div>
+                            <div class='flex '>
+                                <canvas id="Chart" width="400" height="300"></canvas>
+
+                                <script>
+                                    
+                                    // Create the chart
+                                    var ctx = document.getElementById('Chart').getContext('2d');
+                                    var myChart = new Chart(ctx, {
+                                        type: 'bar',
+                                        data: {
+                                            labels: ['Baseline','Meter Reading'],
+                                            datasets: [{
+                                                label: '{{facility}} Energy Use Profile -Baseline',
+                                                data: [{{latest_audit.audit_result}},{{latest_audit.meter_reading}}],
+                                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                                borderColor: 'rgba(75, 192, 192, 1)',
+                                                borderWidth: 1,
+                                                
+                                            },
+                                            
+        
+                                            ],
+                                        },
+                                        options: {
+                                            responsive: true,
+                                            maintainAspectRatio: false
+                                        }
+                                    });
+                                        
+                                </script>
+                            </div>
+                          </div>
+                        </div>
+                        
+                      </div>
+
+                    </div>
+
+
+                  </div>
+
+                    
+                </div>
+                {% comment %} <div class='p-2 md:h-screen md:w-[25%]' > 
+                    {% include "../components/rightbar.html" %}
+                </div> {% endcomment %}
+                <div class='p-2 md:h-screen md:w-[25%]' > 
+                {% comment %} {% include "../components/rightbar.html" %} {% endcomment %}
+                <div class='px-2 gap-8 flex flex-row items-center mx-auto w-83 '>
+              {% comment %} <img class='w-12 rounded-full' src={% static "img/download.png" %}/> {% endcomment %}
+              <img src={% static "img/download.png" %} class='w-82'/>
+              <a href="{% url "accounts:logout" %}" class='font-bold2 hover:text-[#019dec] text-blue text-sm links' >
+                 Log  Out
+                    </a>
+                
+          </div>
+            </div>
+              
+          </div>
+    </div>
+  </div>
+
+{% endblock content %}

@@ -1,0 +1,29 @@
+
+<header class="text-primary mt-1 w-[94%] mx-auto">
+  <nav class="flex justify-between items-center">
+    <div class="flex flex-row items-center nav-bar" >
+      <img class='w-8' src="static\img\images.png"/>
+      <h1 class="font-bold">KLM Energy<span class="px-2">Audit App</span></h1>
+    </div>
+   <div
+      class="md:static md:min-h-fit absolute md:w-auto w-[94%] top-[15%] left-[3%] min-h-[60vh] flex justify-between eft-0 md:block rounded items-center px-5 transition-all  duration-300"
+    >
+      <ul class="flex md:flex-row flex-col md:items-center md:gap-[4vh] gap-8">
+        <a
+          href='{% url "accounts:login" %}'
+          class="font-bold2 hover:text-[#019dec] text-danger links"
+        >
+          Login
+        </a>
+        <a
+          href='{% url "accounts:signup" %}'
+          class="font-bold2 hover:text-[#019dec] text-primary px-4 py-2 links"
+        >
+          Register
+        </a>
+      </ul>
+    </div>
+
+    <div class="block md:hidden md:z-0"></div>
+  </nav>
+</header>

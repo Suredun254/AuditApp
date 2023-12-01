@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block script %} 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+
+
+{% block content %}
+<div class='bg-[#191a22] text_blue'>
+    <div class='flex flex-col md:flex-row gap-4'>
+          {% include "../components/sidebar.html" %}
+          <div class='md:w-[90%] '>
+            
+            <div class='flex flex-col md:flex-row  gap-4'>
+                <div class='p-2 flex flex-col gap-8 md:w-[75%]  border-r border-l  border-gray-600' >
+                  
+                  <div class='flex flex-row justify-between '>
+                      <div>
+                          <p>Date </p>
+                          <p class='text-sm text-gray-500'>{{date}}</p>
+                      </div>
+
+                      <div class='flex flex-row gap-4 items-center'>
+                        <div class='flex flex-row gap-2'>
+                          
+                          <div class='md:hidden block'>
+                          
+                          
+                          </div>
+                        </div>
+                        <div>
+
+                          
+                        </div>
+
+                      </div>
+                      
+                  </div>
+                  
+                  <div class='flex mt-2 flex-col gap-4'>
+                    <div class='flex flex-col gap-8'>
+                    <p>{{facility}} Latest Audits</p>
+
+                    {% if latest_audits %}
+                    <div class='flex flex-wrap gap-4'>
+                        {% for audit in latest_audits %}
+                        <div class='flex rounded-xl  border border-gray-600 flex-col md:w-[32%] gap-4 '>
+                            <p class=' p-2 '>Results {{audit.audit_result}} KwH</p>
+                            <p class=' p-2 '> {{audit.per_capita_consumption}} Per Capita Consumption</p>
+                           
+                            <p class=' p-2 '>Date {{audit.date}} </p>
+                            
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    {% else %}
+                    <p>No audits yet</p>
+                    {% endif %}
+                    
+                    
+
+                  
+                    <p>Energy Use Profile</p>
+                    <div>
+                        <canvas id="myChart" width="400" height="400"></canvas>
+
+                        <script>
+                            
+                            // Create the chart
+                            var ctx = document.getElementById('myChart').getContext('2d');
+                            var myChart = new Chart(ctx, {
+                                type: 'line',
+                                data: {
+                                    labels: [{% for audit in audits %} "{{audit.date}}", {% endfor %}],
+                                    datasets: [{
+                                        label: '{{facility}} Energy Use Profile -Baseline',
+                                        data: [{% for audit in audits %} {{audit.audit_result}}, {% endfor %}],
+                                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                        borderColor: 'rgba(75, 192, 192, 1)',
+                                        borderWidth: 1,
+                                        tension: 0.1
+                                    },
+                                    {
+                                        label: '{{facility}} Meter Reading',
+                                        data: [{% for audit in audits %} {{audit.meter_reading}}, {% endfor %}],
+                                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                        borderColor: 'rgba(255, 99, 132, 1)',
+                                        borderWidth: 1,
+                                        tension: 0.1
+                                    },
+
+                                    ]
+                                },
+                                options: {
+                                    responsive: true,
+                                    maintainAspectRatio: false
+                                }
+                            });
+                                
+                        </script>
+
+                    </div>
+
+                      
+                    </div>
+                    
+
+                  </div>
+
+                    
+                </div>
+                <div class='p-2 md:h-screen md:w-[25%]' > 
+                    {% include "../components/rightbar.html" %}
+                </div>
+            </div>
+              
+          </div>
+    </div>
+  </div>
+
+
+{% endblock %}

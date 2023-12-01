@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class='bg-[#191a22] text-blue'>
+    <div class='flex flex-col md:flex-row gap-4'>
+        {% include "../components/sidebar.html" %}
+          <div class='md:w-[90%] '>
+            
+            <div class='flex flex-col md:flex-row  gap-4 text-blue'>
+                <div class='p-2 flex flex-col gap-8 md:w-[75%]  border-r border-l  border-gray-600' >
+                  
+                  <div class='flex flex-row justify-between '>
+                      <div>
+                          <p>Date </p>
+                          <p class='text-sm text-gray-500'>{{date}}</p>
+                      </div>
+
+                      <div class='flex flex-row gap-4 items-center'>
+                        <div class='flex flex-row gap-2'>
+                          {% comment %} <Link to='/audit/do'
+                           class='mt-1 py-3 px-4 bg-pink-300  text-black rounded-2xl'>
+                              Audit Facility
+                          </Link> {% endcomment %}
+                          <a href="{% url "audits:doaudit" %}"
+                       class='mt-1 py-3 px-4 bg-red-300  text-white rounded-2xl '>
+                          Audit Facility
+                      </a>
+                          <div class='md:hidden block'>
+                          
+                          
+                          </div>
+                        </div>
+                        <div>
+
+                          
+                        </div>
+
+                      </div>
+                      
+                  </div>
+                  
+                  <div class='flex mt-2 flex-col gap-4'>
+                    <div class='flex flex-col gap-8'>
+                        <p>Register Equipments</p>
+
+                        <form action="{% url 'audits:addEquipment' id %}" method='POST' class='flex flex-col gap-8'>
+                            {% csrf_token %}
+                            <div class='flex md:flex-row gap-4 flex-col '>
+                                <input name='device'
+                                    required placeholder='Device Name'
+                                    type='text'
+                                    class='my-2 p-3 p rounded-xl bg-gray-300 border-0'
+                                    
+                                />
+                                <input name='rating'
+                                    required placeholder='Device rating in W' 
+                                    type='text'
+                                    class='my-2 p-3 p rounded-xl bg-gray-300 border-0'
+                                    
+                                />
+  
+                            </div>
+  
+                            <button type='submit'
+                                class='mt-1 md:w-[25%] p-3 bg-blue-500  text-black rounded-2xl'>
+                                Register Equipment
+                            </button>
+                        </form>
+                    <p>Existing Equipments</p>
+                    {% if devices %}
+                        <div class='flex flex-wrap gap-4'>
+                            {% for device in devices %}
+                                <div class='flex rounded-xl  border border-gray-600 flex-col md:w-[32%] gap-4 shadow_style '>
+                                    <p class=' p-2 '> {{device.name}}</p>
+                                    <p class=' p-2 '> {{device.rating}} W</p>
+                                    <a href='{% url 'audits:deleteequipment' device.id %}'>Delete Equipment</a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                    <p>No Equipments yet</p>
+                    {% endif %}
+                    
+                    </div>
+                    
+
+                  </div>
+
+                    
+                </div>
+                <div class='p-2 md:h-screen md:w-[25%]' > 
+                    {% include "../components/rightbar.html" %}
+                </div>
+            </div>
+              
+          </div>
+    </div>
+  </div>
+
+
+{% endblock %}

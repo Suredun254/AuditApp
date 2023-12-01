@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class=' text-black'>
+    <div class='flex flex-col md:flex-row gap-4'>
+        {% include "../components/sidebar.html" %}
+          <div class='md:w-[70%] '>
+            <div class='flex flex-col md:flex-row  gap-4'>
+                <div class='p-2 flex flex-col gap-8   border-l  border-gray-600' >
+                  
+                  <div class='flex flex-row justify-between '>
+                      <div>
+                          <p>Date </p>
+                          <p class='text-sm text-gray-500'>{{date}}</p>
+                      </div>
+
+                      <div class='flex flex-row gap-4 items-center'>
+                        <div class='flex flex-row gap-2'>
+                          
+                          <div class='md:hidden block'>
+                          
+                          
+                          </div>
+                        </div>
+                        <div>
+
+                          
+                        </div>
+
+                      </div>
+                      
+                </div>
+                
+                <div class='flex mt-2 flex-col gap-4'>
+                    
+                  
+                  <div class='flex mt-2 flex-col gap-4'>
+                    <div class='flex flex-col gap-8'>
+                      <h1 style="color: rgb(255, 38, 0); text-align: center;">Tips</h1>
+                      
+                    </div>
+                    <div class='div_content p-4 mt-3 rounded-xl'>
+                      <p class='pb-4 pt-2 text-sm text-gray-400'>
+                      Many electronic devices and chargers continue to draw power even when they are not in use. 
+                      These are often referred to as "energy vampires" or "phantom loads."
+                      </p>
+                      <Link>
+                      <button class=' p-2 rounded-xl bg-gray-800 '>
+                          Click for more
+                      </button>
+                      </Link>
+                    </div>
+
+
+                    <div class='div_content p-4 mt-3 rounded-xl'>
+                      <p class='pb-4 pt-2 text-sm text-gray-400'>
+                      Many electronic devices and chargers continue to draw power even when they are not in use. 
+                      These are often referred to as "energy vampires" or "phantom loads."
+                      </p>
+                      <Link>
+                      <button class=' p-2 rounded-xl bg-gray-800'>
+                          Click for more
+                      </button>
+                      </Link>
+                    </div>
+
+                    <div class='div_content p-4 mt-3 rounded-xl'>
+                      <p class='pb-4 pt-2 text-sm text-gray-400'>
+                      Many electronic devices and chargers continue to draw power even when they are not in use. 
+                      These are often referred to as "energy vampires" or "phantom loads."
+                      </p>
+                      <Link>
+                      <button class=' p-2 rounded-xl bg-gray-800'>
+                          Click for more
+                      </button>
+                      </Link>
+                    </div>
+
+
+                    <div class='grow text-gray-500 border border-gray-600 rounded-xl p-2'>
+                      <p class='py-2 flex flex-row '>
+                          Sign Up<AiOutlinePlus size={12}/>
+                      </p>
+                      <p class='py-2 text-sm text-gray-500 '>Create account to get more</p>
+                      
+                      <Link>
+                          <button class='px-2 w-full py-2 rounded-xl bg-yellow-400'>
+                              Get started
+                          </button>
+                      </Link>
+                  </div>
+
+                    
+      
+                  </div>
+
+                  
+
+                    
+                </div>
+                
+            </div>
+
+            
+            <div style='width:10%'
+      class="md:static md:min-h-fit absolute top-[15%] left-[3%] min-h-[60vh] flex justify-between eft-0 md:block rounded items-center px-5 transition-all  duration-300"
+    >
+      <ul class="flex md:flex-row flex-col md:items-center md:gap-[4vh] gap-8">
+        <img src={% static "img/download.png" %} class='w-82'/>        
+        <a
+          href='{% url "accounts:logout" %}'
+          class="font-bold2 hover:text-[#019dec] text-primary px-4 py-2 links"
+        >
+          Logout
+        </a>
+
+      </ul>
+    </div>
+              
+          </div>
+          
+    </div>
+  </div>
+
+{% endblock content %}

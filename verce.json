@@ -1,0 +1,20 @@
+{
+    "builds": [
+      {
+        "src": "audit/wsgi.py",
+        "use": "@vercel/python"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "audit/wsgi.py"
+      }
+    ],
+    "rewrites": [
+        {
+          "source": "/(.*)",
+          "destination": "/"
+        }
+      ]
+  }

@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class='bg-[#191a22] '>
+    <div class='flex flex-col md:flex-row gap-4'>
+        {% include "../components/sidebar.html" %}
+          <div class='md:w-[90%] '>
+            
+            <div class='flex flex-col md:flex-row  gap-4'>
+                <div class='p-2 flex flex-col gap-8 md:w-[75%]  border-r border-l  border-gray-600' >
+                  
+                  <div class='flex flex-row justify-between '>
+                      <div>
+                          <p>Date </p>
+                          <p class='text-sm text-gray-500'>{{date}}</p>
+                      </div>
+
+                      <div class='flex flex-row gap-4 items-center'>
+                        <div class='flex flex-row gap-2'>
+                          
+                          <div class='md:hidden block'>
+                          
+                          
+                          </div>
+                        </div>
+                        <div>
+
+                          
+                        </div>
+
+                      </div>
+                      
+                </div>
+                <div>
+                    <a href="{% url "audits:doaudit" %}"
+                       class='mt-1 py-3 px-4 bg-red-300  text-white rounded-2xl '>
+                          Audit Facility
+                      </a>
+                </div>
+                <div class='flex mt-2 flex-col gap-4 text-blue'>
+                    <div class='flex flex-col gap-8 '>
+                    <p>Register  Facility</p>
+                    
+                    <form action='{% url 'audits:facilities' %}' method='POST' class='flex flex-col gap-8'>
+                        {% csrf_token %}
+                        <div class='flex md:flex-row flex-col gap-4 '>
+                            <input name='facility'
+                                required placeholder='Facility Name'
+                                type='text'
+                                class='my-2 p-3 p rounded-xl bg-gray-300 border-0'
+                                
+                            />
+                            <input name='location'
+                                required placeholder='Facility Location' 
+                                type='text'
+                                class='my-2 p-3 p rounded-xl bg-gray-300 border-0'
+                                
+                            />
+
+                        </div>
+
+                        <button type="submit" 
+                            class='mt-1 md:w-[25%] p-3 bg-green text-white rounded-2xl'>
+                            Register Facility
+                        </button>
+                    </form>
+
+
+                    
+                    
+                    </div>
+                    
+
+                  </div>
+                  
+                  <div class='flex mt-2 flex-col gap-4'>
+                    <div class='flex flex-col gap-8'>
+                      <p>Registered Facilities</p>
+                      
+                    </div>
+                    {% if facilities %}
+                    <div class='flex flex-wrap gap-4'>
+                        {% for facility in facilities %}
+                            <div  class='p-4 flex flex-col gap-4 border border-gray-600   rounded-2xl md:w-[49%] shadow_style'>
+                                <div class='flex flex-row gap-4 '>
+                                    
+                                    <p>{{facility.name}}</p>
+
+                                </div>
+                                <div class='flex flex-row'>
+                                    <p class=' py-2'>
+                                        Location : 
+                                    </p>
+                                    <p class='px-2 py-2'>{{facility.location}} </p>
+                                </div>
+
+                                <div class='flex flex-row gap-4'>
+                                    <a href='{% url 'audits:addEquipment' facility.id %}' class='p-3 bg-green rounded-xl text-white' >
+                                        Add Equipments
+                                    </a>
+                                    <a href='{% url 'audits:facilityStats' facility.id %}' class='p-3 bg-blue-500 rounded-xl text-white' >
+                                        Energy Stats
+                                    </a>
+
+                                    <a href='{% url 'audits:deletefacility' facility.id %}' class='p-3 bg-red-300 rounded-xl text-white' >
+                                        Delete
+                                    </a>
+                                </div>
+                            </div>
+
+                        {% endfor %}
+                    </div>
+
+                    {% else %}
+                    <p>No Facilities Yet</p>
+
+                    {% endif %}
+
+                    
+                </div>
+                
+            </div>
+            <div class='p-2 md:h-screen md:w-[25%]' > 
+                {% comment %} {% include "../components/rightbar.html" %} {% endcomment %}
+                <div class='px-2 gap-8 flex flex-row items-center mx-auto w-83 '>
+              {% comment %} <img class='w-12 rounded-full' src={% static "img/download.png" %}/> {% endcomment %}
+              <img src={% static "img/download.png" %} class='w-82'/>
+              <a href="{% url "accounts:logout" %}" class='font-bold2 hover:text-[#019dec] text-blue text-sm links' >
+                 Log  Out
+                    </a>
+                
+          </div>
+            </div>
+              
+          </div>
+    </div>
+  </div>
+
+{% endblock content %}

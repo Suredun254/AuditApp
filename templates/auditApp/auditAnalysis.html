@@ -1,0 +1,78 @@
+{% extends "base.html" %} {% load static %} {% block script %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %} {% block content %}
+<div class="bg-[#191a22] text-black">
+  <div class="flex flex-col md:flex-row gap-4">
+    {% include "../components/sidebar.html" %}
+    <div class="md:w-[90%]">
+      <div class="flex flex-col md:flex-row gap-4">
+        <div
+          class="p-2 flex flex-col gap-8 md:w-[75%] border-r border-l border-gray-600"
+        >
+          <div class="flex flex-row justify-between">
+            <div>
+              <p>Date</p>
+              <p class="text-sm text-gray-500">{{date}}</p>
+            </div>
+
+            <div class="flex flex-row gap-4 items-center">
+              <div class="flex flex-row gap-2">
+                <div class="md:hidden block"></div>
+              </div>
+              <div></div>
+            </div>
+          </div>
+
+          <div class="flex mt-2 flex-col gap-4">
+            <div class="flex flex-col gap-8">
+              <p>{{facility}} Usage Distribution</p>
+
+              <div class="bg-gray-400 p-2 rounded-xl">
+                <canvas id="myChart" width="400" height="400"></canvas>
+
+                <script>
+
+                  // Create the chart
+                  var ctx = document.getElementById('myChart').getContext('2d');
+                  var myChart = new Chart(ctx, {
+                      type: 'doughnut',
+                      data: {
+                          labels: [{% for device in devices %} "{{device.name}}", {% endfor %}],
+                          datasets: [{
+                              label: '{{facility}} Energy Use Profile -Baseline in W ',
+                              data: {{values}},
+                              backgroundColor: [
+                              'rgb(255, 123, 132)',
+                              'rgb(75, 1, 192)',
+                              'rgb(54, 162, 255)',
+                             'rgb(18, 130, 10)',
+                              'rgb(255, 10, 255)'
+                              ]
+
+                          },]
+                      },
+                      options: {
+                          responsive: true,
+                          maintainAspectRatio: false
+                      }
+                  });
+                </script>
+              </div>
+
+              <p>Reccommendation</p>
+
+              <div>
+                <p class="flex w-[98%] p-2 text-black">{{recommendation}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="p-2 md:h-screen md:w-[25%]">
+          {% include "../components/rightbar.html" %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

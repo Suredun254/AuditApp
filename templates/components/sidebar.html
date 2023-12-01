@@ -1,0 +1,55 @@
+{% load static %}
+
+<div class='
+     side-bar'>
+
+        <div class='flex flex-col  h-[100%] justify-between'>
+            <div class='flex flex-col gap-4'>
+                <div class='flex flex-row justify-between items-center mx-auto '>
+                     <div>
+                        <div class='px-2 flex flex-row gap-2 items-center rounded-2xl nav-bar'>
+                        <img class='w-82' src={% static "img/images.png" %}/>
+                        <p class=''>KLM<span class='px-2'>Audits</span></p>
+                        </div>
+                     </div>
+                    
+                    <div class='md:hidden block'>
+                    
+                    </div>
+                </div>
+                <div class='flex flex-col gap-2  mx-auto vertical-menu'>
+                    {% if 'guest' in request.path %}
+                    <a href='{% url "audits:guest" %}' class='flex flex-row gap-2 items-center text-sm'>
+                        <AiFillDashboard/> Guest
+                    </a>
+                    {% endif %}
+                    <a href='{% url "audits:home" %}' class='active flex {% if 'guest' in request.path %} hidden {% endif %}flex-row gap-2 items-center  text-sm'>
+                        <AiFillDashboard/> Dashboard
+                    </a>
+                    <a href='{% url "audits:history" %}' class='flex {% if 'guest' in request.path %} hidden {% endif %} flex-row gap-2 items-center  text-sm'>
+                        <AiOutlineDatabase/>History
+                    </a>
+                     <a href='{% url "audits:facilities" %}' class='flex {% if 'guest' in request.path %} hidden {% endif %} flex-row gap-2 items-center  text-sm'>
+                        <AiOutlineAccountBook/> Facilities
+                    </a>
+
+                    <a href='{% url "audits:audit" %}' class='flex {% if 'guest' in request.path %} hidden {% endif %} flex-row gap-2 items-center  text-sm'>
+                        <AiOutlineAccountBook/> Audit
+                    </a>
+
+                   
+                
+                  
+                    </div>
+                
+            </div>
+            {% comment %} <div class='mx-auto'>
+                <div class='mx-auto'>
+                    <a href="{% url "accounts:logout" %}" class='flex flex-row gap-2 items-center log-out text-sm'>
+                        <img src={% static "img/download.png" %} class='w-82'/> Log  Out
+                    </a>
+                </div>
+            </div> {% endcomment %}
+        </div>
+        
+    </div>

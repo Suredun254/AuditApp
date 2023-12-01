@@ -1,0 +1,85 @@
+{% load static %}
+
+<div class='flex flex-col gap-4'>
+    <div class='md:block hidden'>
+      <div class='flex flex-row 
+      {% if 'guest' in request.path %} hidden {% endif %}
+       gap-5 '>
+          {% comment %} <div class='px-2 border border-gray-600 flex items-center rounded-2xl'>
+              <img class='w-8' src={% static "img/images.png" %}/>
+          </div> {% endcomment %}
+          
+          <div class='px-2 gap-8 flex flex-row items-center mx-auto w-83 '>
+              {% comment %} <img class='w-12 rounded-full' src={% static "img/download.png" %}/> {% endcomment %}
+              <img src={% static "img/download.png" %} class='w-82'/>
+              <a href="{% url "accounts:logout" %}" class='font-bold2 hover:text-[#019dec] text-blue text-sm links' >
+                 Log  Out
+                    </a>
+                
+          </div>
+          
+      </div>
+    </div>
+
+    
+     <div class='grow text-white rounded-xl'>
+        <p class='py-2 px-2 bg-green rounded-xl text-sm'> 
+            Energy Conservation Tips</p>
+        
+        <div class='flex flex-col gap-3 pt-5'>
+            <div class='border border-gray-600 p-2 rounded-xl'>
+                <p class='pb-4 pt-2 text-sm text-gray-400'>
+                Many electronic devices and chargers continue to draw power even when they are not in use. 
+                These are often referred to as "energy vampires" or "phantom loads."
+                </p>
+                <Link>
+                <button class=' p-2 rounded-xl bg-gray-800 login'>
+                    Click for more
+                </button>
+                </Link>
+
+            </div>
+
+            <div class='border border-gray-600 p-2 rounded-xl '>
+                <p class='pb-4 pt-2 text-sm text-gray-400'>
+                Many electronic devices and chargers continue to draw power even when they are not in use. 
+                These are often referred to as "energy vampires" or "phantom loads."
+                </p>
+                <Link>
+                <button class=' p-2 rounded-xl bg-gray-800 login'>
+                    Click for more
+                </button>
+                </Link>
+
+            </div>
+
+            <div class='border border-gray-600 p-2 rounded-xl'>
+                <p class='pb-4 pt-2 text-sm text-gray-400'>
+                Many electronic devices and chargers continue to draw power even when they are not in use. 
+                These are often referred to as "energy vampires" or "phantom loads."
+                </p>
+                <Link>
+                <button class=' p-2 rounded-xl bg-gray-800 login'>
+                    Click for more
+                </button>
+                </Link>
+
+            </div>
+        </div>
+        
+        
+    </div> 
+
+    {% comment %} <div class='grow text-white border border-gray-600 rounded-xl p-2'>
+        <p class='py-2 flex flex-row '>
+            Newsletter<AiOutlinePlus size={12}/>
+        </p>
+        <p class='py-2 text-sm text-gray-500'>Get Access to our Newsletters for more tips</p>
+        
+        <Link>
+            <button class='px-2 w-full py-2 rounded-xl bg-yellow-400'>
+                Get started
+            </button>
+        </Link>
+    </div> {% endcomment %}
+</div>

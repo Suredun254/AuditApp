@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class='bg-[#191a22] text-blue'>
+    <div class='flex flex-col md:flex-row gap-4'>
+        {% include "../components/sidebar.html" %}
+          <div class='md:w-[90%] '>
+            
+            <div class='flex flex-col md:flex-row  gap-4'>
+                <div class='p-2 flex flex-col gap-8 md:w-[75%]  border-r border-l  border-gray-600' >
+                  
+                  <div class='flex flex-row justify-between '>
+                      <div>
+                          <p>Date </p>
+                          <p class='text-sm text-gray-500'>{{date}}</p>
+                      </div>
+
+                      <div class='flex flex-row gap-4 items-center'>
+                        <div class='md:hidden block'>
+                          {
+                            isSidebarVisible ?
+                            <p></p>:
+                            <AiOutlineMenu
+                              onClick={toggleSidebar}
+                            />
+                          }
+                          
+                        </div>
+                        <div>
+
+                          
+                        </div>
+
+                      </div>
+                      
+                  </div>
+                  
+                  <div class='flex mt-2 flex-col gap-4'>
+                    <div class='flex flex-col gap-8'>
+                      
+                      <form action='{% url "audits:facilityAudit" id %}' method='POST' class='flex flex-col gap-8'>
+                            {% csrf_token %}
+                          <p>Enter Devices Operation Hours</p>
+                          <div class='flex flex-row gap-4 '>
+                              <p class='w-[30%] p-2'>Device</p>
+                              <p class='w-[30%] p-2'>Rating</p>
+                              <p class='w-[30%] p-2'>Operation Hours</p>
+                          </div>
+                          {% if devices %}
+                                <div>
+                                    {% for device in devices %}
+                                    <div  class='flex flex-row gap-4 '>
+                                        <p class='w-[28%] p-2 '> {{device.name}}</p>
+                                        <p class='w-[28%] p-2 '> {{device.rating}} W</p>
+                                        <input name='operation{{device.id}}'
+                                            required placeholder='Operation Hours' 
+                                            type='number'
+                                            class='my-2 p-3 p  w-[40%] rounded-xl bg-gray-300 border-0'
+                                            />
+                                            <input name='number{{device.id}}'
+                                            required placeholder='Number of Devices' 
+                                            type='number'
+                                            class='my-2 p-3 p  w-[40%] rounded-xl bg-gray-300 border-0'
+                                            />
+                                        
+                                    </div>
+                                    {% endfor %}
+                                    <div class='flex flex-row  p-3 gap-4'>
+                                        <p class='py-3'>Meter Readings in KwH</p>
+                                        <input name='meter'
+                                            required placeholder='Meter Reading' 
+                                            type='number'
+                                            class='my-2   w-[40%] rounded-xl bg-gray-300 border-0'
+                                            />
+                                    </div>
+                                     <div class='flex flex-row  p-3 gap-4'>
+                                        <p class='py-3'>Number of Users</p>
+                                        <input name='users'
+                                            required placeholder='No of Users' 
+                                            type='number'
+                                            class='my-2   w-[40%] rounded-xl bg-gray-300 border-0'
+                                            />
+                                    </div> 
+                                </div> 
+                          {% else %}
+                          <p>No devices yet</p>
+                          {% endif %}
+                          
+
+                          <button type='submit'
+                              class='mt-1 md:w-[25%] p-3 bg-red-300  text-white rounded-2xl'>
+                              Audit
+                          </button>
+                      </form>
+                      
+                    </div>
+                    
+
+                  </div>
+
+                    
+                </div>
+                <div class='p-2 md:h-screen md:w-[25%]' > 
+                    {% include "../components/rightbar.html" %}
+                </div>
+            </div>
+              
+          </div>
+    </div>
+  </div>
+
+{% endblock %}

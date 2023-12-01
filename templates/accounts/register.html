@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %} | Register {% endblock %}
+{% load static %}
+
+{% block content %} 
+<div>
+    {% include "../components/navbar.html" %}
+
+    <div class='mt-2 items-center user_login_style'>
+        <div class='flex items-center justify-center h-[90vh] flex-col items-center md:w-[50%]  m-auto'>
+            <img class='w-9' src={% static "img/images.png" %}/>
+           <div class='flex flex-row gap-2'>
+                <p class='py-3 text-blue'>Sign Up</p>
+                
+           </div>
+            
+
+            <div>
+                <form action='{% url 'accounts:signup' %}' method='POST'  class='flex flex-col '>
+                    {% csrf_token %}
+
+                    <div class='flex flex-row gap-4'>
+                        <input name='email'
+                        required placeholder='Email' class='my-2 p-3 p rounded-xl bg-gray-300 border-0'
+                        
+                        />
+                        <input name='name'
+                        required placeholder='Name' class='my-2 p-3 p rounded-xl bg-gray-300 border-0'
+                        
+                        />
+                    </div>
+
+                    <input name='password_one' 
+                    required placeholder='Password' class='my-2 p-3 rounded-xl bg-gray-300 border-0'
+                    
+                    />
+
+                    <input name='password_two' 
+                    required placeholder='Confirm Password' class='my-2 p-3 rounded-xl bg-gray-300 border-0'
+                    
+                    />
+
+                    <button type='submit'  class='mt-1 mx-auto p-3 bg-blue-500 rounded-2xl login'>
+                        Sign Up 
+                    </button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class='bg-[#191a22] text-black'>
+    <div class='flex flex-col md:flex-row gap-4'>
+      {% include "../components/sidebar.html" %}
+          <div class='md:w-[90%] '>
+            
+            <div class='flex flex-col md:flex-row  gap-4'>
+                <div class='p-2 flex flex-col gap-8 md:w-[75%]  border-r border-l  border-gray-600' >
+                  
+                  <div class='flex flex-row justify-between '>
+                      <div>
+                          <p>Date </p>
+                          <p class='text-sm text-gray-500'>{{today}}</p>
+                      </div>
+
+                      <div class='flex flex-row gap-4 items-center'>
+                        <div class='flex flex-row gap-2'>
+                          
+                          <div class='md:hidden block'>
+                          
+                          
+                            </div>
+                        </div>
+                        <div>
+
+                          
+                        </div>
+
+                      </div>
+                      
+                  </div>
+                  
+                  <div class='flex mt-2 flex-col gap-4'>
+                    <div class='flex flex-col gap-8'>
+                      <p>Facilities</p>
+                      
+                    </div>
+                    {% if facilities %}
+                    <div class='flex flex-wrap gap-2'>
+                        {% for facility in facilities %}
+                        <div class='p-4 flex flex-col gap-4 border border-gray-600  rounded-2xl md:w-[32%]'>
+                            <div class='flex flex-row gap-4'>
+                                
+                                <p>{{facility.name}}</p>
+
+                            </div>
+                            <div class='flex flex-row'>
+                                <p class=' py-2'>
+                                    Location : 
+                                </p>
+                                <p class='px-2 py-2'>{{facility.location}} </p>
+                            </div>
+
+                            <a href='{% url "audits:facilityAudit" facility.id %} '
+                             class='p-3 login w-[60%] rounded-xl text-white' >
+                                Audit
+                            </a>
+                        </div>
+                        {% endfor %}
+                        
+                    </div>
+                    {% else %}
+                    <p>No Facilities Yet</p>
+
+                    {% endif %}
+                   
+
+                  </div>
+
+                    
+                </div>
+                <div class='p-2 md:h-screen md:w-[25%]' > 
+                    {% include "../components/rightbar.html" %}
+                </div>
+            </div>
+              
+          </div>
+    </div>
+  </div>
+
+
+{% endblock %}

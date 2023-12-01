@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class='bg-[#191a22] text-blue'>
+    <div class='flex flex-col md:flex-row gap-4'>
+        {% include "../components/sidebar.html" %}
+        <div class='md:w-[90%] '>
+
+            <div class='flex flex-col md:flex-row  gap-4'>
+                <div class='p-2 flex flex-col gap-8 md:w-[75%]  border-r border-l  border-gray-600' >
+
+                    <div class='flex flex-row justify-between '>
+                        <div>
+                            <p>Date </p>
+                            <p class='text-sm text-black'>{{date}}</p>
+                        </div>
+
+                        <div class='flex flex-row gap-4 items-center'>
+                        <div class='md:hidden block'>
+                                {
+                                isSidebarVisible ?
+                                <p></p>:
+                                <AiOutlineMenu
+                                    onClick={toggleSidebar}
+                                />
+                                }
+                                
+                            </div>
+                            <div>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div>
+                        <a href="{% url "audits:doaudit" %}"
+                           class='mt-1 py-3 px-4 bg-red-300  text-white rounded-2xl'>
+                              Audit Facility
+                          </a>
+                    </div>
+
+                    <div class='flex mt-2 flex-col gap-4'>
+                        <div class='flex flex-col gap-8'>
+                            <p>Audits</p>
+                            {% if audits %}
+                            <div class='flex flex-wrap gap-2'>
+                                {% for audit in audits %}
+                                <div  class='p-4 flex flex-col gap-4 border border-gray-600  rounded-2xl md:w-[32%] shadow_style'>
+                                    <div class='flex flex-row gap-4'>
+
+                                        <p>Facility : {{audit.facility.name}}</p>
+
+                                    </div>
+                                    <p>Results in KwH: {{audit.audit_result}}</p>
+                                     {% comment %} <p>Energy per Capita Consumption: {{audit.per_capita_consumption}}</p> {% endcomment %}
+
+                                    <div class='flex flex-row gap-4'>
+                                        <p class=' text-white px-2 py-2 bg-green-300 rounded-xl'>{{audit.date}} </p>
+                                        <a  href='{% url "audits:auditanalysis" audit.id %}' class='text-white px-3 py-2 bg-red-300 rounded-xl'> 
+                                            Analysis
+                                        </a>
+                                        
+                                    </div>
+
+                                </div>
+
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            <p>No audits Yet</p>
+
+                            {% endif %}
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+                <div class='p-2 md:h-screen md:w-[25%]' >
+                    {% include "../components/rightbar.html" %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
