@@ -101,8 +101,14 @@ WSGI_APPLICATION = "audit.wsgi.app"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": 'django.db.backends.postgresql',
+        "NAME": os.getenv('railway'),
+        'URL':os.getenv('postgresql://postgres:adaf6B1aE5Bacc*4f45DFEFCfCBD1egD@viaduct.proxy.rlwy.net:55314/railway'),
+        'USER':os.getenv('postgres'),
+        'PASSWORD':os.getenv('adaf6B1aE5Bacc*4f45DFEFCfCBD1egD'),
+        'HOST':os.getenv('viaduct.proxy.rlwy.net'),
+        'PORT':os.getenv('55314'),
+
     }
 }
 

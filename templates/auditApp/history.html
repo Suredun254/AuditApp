@@ -73,6 +73,9 @@
                         <div class='flex flex-row gap-4'>
                           <AiFillHeart/>
                           <p>Total Audits Done</p>
+                          <p class="text-2xl font-semibold mx-auto py-2">
+                    {{facility_count}}
+                  </p>
 
                         </div>
                         <div class='flex flex-col '>
@@ -166,17 +169,6 @@
 
                     
                 </div>
-                {% comment %} <div class='p-2 md:h-screen md:w-[25%]' > 
-                    {% include "../components/rightbar.html" %}
-                </div> {% endcomment %}
-                <div class='p-2 md:h-screen md:w-[25%]' > 
-                {% comment %} {% include "../components/rightbar.html" %} {% endcomment %}
-                <div class='px-2 gap-8 flex flex-row items-center mx-auto w-83 '>
-              {% comment %} <img class='w-12 rounded-full' src={% static "img/download.png" %}/> {% endcomment %}
-              <img src={% static "img/download.png" %} class='w-82'/>
-              <a href="{% url "accounts:logout" %}" class='font-bold2 hover:text-[#019dec] text-blue text-sm links' >
-                 Log  Out
-                    </a>
                 
           </div>
             </div>

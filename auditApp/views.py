@@ -271,7 +271,7 @@ def guestDashboard(request):
         
         prompt=request.POST['guest-prompt']
         my_prompt=f''
-        # recommendation=generate_chat_prediction(my_prompt)
+        recommendation=generate_chat_prediction(my_prompt)
     
     context={
         'date':today,
